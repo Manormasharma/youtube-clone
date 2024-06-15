@@ -1,7 +1,10 @@
 import React from 'react'
-
+import { useSelector } from 'react-redux'
 const Sidebar = () => {
-  return (
+  const isMenuOpen = useSelector(store=>store.nav.isMenuOpen);
+  // pass in useSelector specific portion of store
+  if(!isMenuOpen) return null // Early return pattern
+  return  (
     <div className='w-1/6 sidebar-items py-5'>
         <ul className='border-b pb-3'>
             <li>Home</li>
