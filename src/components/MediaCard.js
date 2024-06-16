@@ -1,13 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const MediaCard = ({ info }) => {
     console.log(info);
-    const { snippet, statistics } = info;
+    const { id, snippet, statistics } = info;
     const { channelTitle, title , thumbnails } = snippet;
     return (
         <>
-            <div className="w-1/4 px-3 pb-3">
-                <img className='rounded-md mb-3' src={thumbnails.medium.url} alt="" />
+            <div className="w-full 2xl:w-1/5 xl:w-1/4 lg:w-1/3 md:w-1/2   px-3 pb-3">
+                <Link to={"watch?v="+ id}>
+                    <img className='rounded-xl mb-3' src={thumbnails.medium.url} alt="" />
+                </Link>
                 <div className="mb-4">
                     <h4 className="text-sm font-medium">{title}</h4>
                     <p className="mt-2 font-hairline text-sm text-grey-darker">

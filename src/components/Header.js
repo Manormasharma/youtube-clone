@@ -8,7 +8,7 @@ const Header = () => {
         dispatch(toggleMenu())
     }
     return (
-        <nav className="py-4 shadow">
+        <nav className="py-4 fixed top-0 w-full bg-white">
             <div className="container-fluid mx-auto px-5 flex items-center">
                 <div className="w-1/5 flex">
                     <button 
