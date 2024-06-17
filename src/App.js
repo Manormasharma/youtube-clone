@@ -6,6 +6,8 @@ import store from './utils/store';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainContainer from './components/MainContainer';
 import WatchPage from './components/WatchPage';
+import { ErrorBoundary } from "react-error-boundary";
+
 const appRoute = createBrowserRouter([{
   Path: "/",
   element: <Body />,
@@ -14,22 +16,24 @@ const appRoute = createBrowserRouter([{
       path: "/",
       element: <MainContainer />
     },
-    {
-      path: "watch",
-      element: <WatchPage />
-    }
+    // {
+    //   path: "watch",
+    //   element: <WatchPage />
+    // }
   ]
   // children will go where ever outlet
-}
-])
+}])
+
 function App() {
   return (
-    <Provider store={store}>
-      <>
-        <Header/>
-        <RouterProvider router={appRoute} />
-      </>
-    </Provider>
+  <ErrorBoundary fallback={<p> Something went wrong</p>}>
+      <Provider store={store}>
+        <>
+          <Header/>
+          <RouterProvider router={appRoute} />
+        </>
+      </Provider>
+    </ErrorBoundary>
   );
 }
 

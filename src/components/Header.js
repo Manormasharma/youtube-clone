@@ -1,12 +1,53 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toggleMenu } from '../utils/NavSlice'
 import { useDispatch } from 'react-redux'
+import { YT_SEARCH_API } from '../utils/Constants';
 
 const Header = () => {
     const dispatch = useDispatch();
+    const [searchValue, setSearchvalue] = useState([])
+    
     const toggleMenuHandler = () =>{
         dispatch(toggleMenu())
     }
+    const searchSubmitHandler = ()=>{
+        
+    }
+    const getSearchSuggestion = async()=>{
+        const data = await fetch(YT_SEARCH_API+searchValue)
+        const json = await data.json()
+        console.log(json.items[0].snippet.title)
+    }   
+    useEffect(()=>{
+        // console.log(searchValue)
+    
+        // Make an API call after key press
+        // but if the difference btw 2 keystroke is <200 - Decline the API Call
+        const timer = setTimeout( () => getSearchSuggestion(), 200)
+        return () =>{
+            clearTimeout(timer)
+        }
+    },[searchValue])
+
+    /**
+     * 
+     * Key - i
+     * render the component
+     * useEffect()
+     * start a timer and make a api call after 200 ms
+     * 
+     * 
+     * 
+     * Key - p
+     * destroy the component(useEffect return method)
+     * re-render the component
+     * useEffect()
+     * start a timer and make a api call after 200 ms
+     * 
+     * 
+     */
+
+
     return (
         <nav className="py-4 fixed top-0 w-full bg-white">
             <div className="container-fluid mx-auto px-5 flex items-center">
@@ -36,8 +77,9 @@ const Header = () => {
                 </div>
                 <div className="w-3/5">
                     <div className="relative flex">
-                        <input type="text" className=" p-3 text-sm w-full border" placeholder="Search" />
-                        <button className='border p-3 px-5 rounded-br-2xl rounded-tr-2xl bg-gray-200 '>Search</button>
+                        <input type="text" className=" p-3 text-sm w-full border" value={searchValue} placeholder="Search" onChange={(e)=>{setSearchvalue(e.target.value)}}  />
+                        
+                        <button className='border p-3 px-5 rounded-br-2xl rounded-tr-2xl bg-gray-200' onSubmit={searchSubmitHandler}>Search</button>
                     </div>
                 </div>
                 <div className="w-1/5">

@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const MediaCard = ({ info }) => {
-    console.log(info);
     const { id, snippet, statistics } = info;
     const { channelTitle, title , thumbnails } = snippet;
     return (
