@@ -17,8 +17,6 @@ const Header = () => {
     const getSearchSuggestion = async()=>{
         const data = await fetch(YT_SEARCH_API+searchValue)
         const json = await data.json()
-        const suggestionItem = json.items[0].snippet.title
-        console.log(suggestionItem)
         setSuggestions(json.items)
     }   
     console.log(suggestions)
