@@ -3,6 +3,7 @@ import { toggleMenu } from '../utils/NavSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { YT_SEARCH_API } from '../utils/Constants';
 import { cacheResult } from '../utils/SearchSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Header = () => {
         dispatch(cacheResult({
             [searchValue] : json.items
         }))
+        console.log(json.items)
     }  
     const searchSubmitHandler = ()=>{
 
@@ -93,13 +95,18 @@ const Header = () => {
                                 placeholder="Search" 
                                 onChange={(e)=>{setSearchvalue(e.target.value)}}
                                 onFocus={()=>setShowSuggestion(true)} 
-                                onBlur={()=>setShowSuggestion(false)} />
+                                // onBlur={()=>setShowSuggestion(false)} 
+                                />
                             <button className='border p-3 px-5 rounded-br-2xl rounded-tr-2xl bg-gray-200' onSubmit={searchSubmitHandler}>Search</button>
                         </div>
                         {showSuggestion && (
                         <div className=' bg-white fixed rounded'>
                             <ul>
-                                {searchValue.length>0 && suggestions.map((suggestion)=>(<li className='px-3 py-2 border-b hover:bg-gray-200' key={suggestion.id}>{suggestion.snippet.title}</li>))}
+                                {searchValue.length>0 && suggestions.map((suggestion)=>(
+                                    <>
+                                    <li className='px-3 py-2 border-b hover:bg-gray-200' key={suggestion.id}> {suggestion.id.videoId}-{suggestion.snippet.title}</li>
+                                    </>
+                                ))}
                             </ul>
                         </div>
                         )}
