@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 const MainContainer = () => {
   const dispatch = useDispatch();
   useEffect(()=>{
-      dispatch(toggleMenu());   
+      dispatch(toggleMenu());  
   },[])
   return (
     <div className="w-5/6">

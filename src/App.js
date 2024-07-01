@@ -16,10 +16,10 @@ const appRoute = createBrowserRouter([{
       path: "/",
       element: <MainContainer />
     },
-    // {
-    //   path: "watch",
-    //   element: <WatchPage />
-    // }
+    {
+      path: "watch",
+      element: <WatchPage />
+    }
   ]
   // children will go where ever outlet
 }])

@@ -6,7 +6,7 @@ const List = ["All", "Live" ,"Gaming", "React js", "Aaj tak", "News", "Internati
 const ButtonList = () => {
   return (
     <div className='py-5'>
-      {List.map((item)=><ButtonPill name={item}/>)}
+      {List.map((item,i)=><ButtonPill key={i} name={item}/>)}
      </div>
   )
 }
